@@ -14,7 +14,11 @@
           { required: true, message: '管理员账号不能为空'}
         ]"
       >
-        <el-input v-model="numberValidateForm.administrator" auto-complete="off"></el-input>
+        <el-input
+          prefix-icon="iconfont el-icon-yonghu"
+          v-model="numberValidateForm.administrator"
+          auto-complete="off"
+        ></el-input>
       </el-form-item>
       <el-form-item
         label="密码"
@@ -23,7 +27,12 @@
           { required: true, message: '密码不能为空'}
         ]"
       >
-        <el-input type="password" v-model="numberValidateForm.password" auto-complete="off"></el-input>
+        <el-input
+          prefix-icon="iconfont el-icon-mima"
+          type="password"
+          v-model="numberValidateForm.password"
+          auto-complete="off"
+        ></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit" @click="submitForm('numberValidateForm')">登录</el-button>

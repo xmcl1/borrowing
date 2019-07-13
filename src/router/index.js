@@ -167,20 +167,27 @@ export default new Router({
         }
       ]
     },
-    {
+    {//登录
       path: '/login',
       name: 'login',
       component: login,
     },
-    {
+    {//锁屏
       path: '/lock',
       name: 'lock',
       component: lock,
+      meta: {
+        httpAuthorize: true
+      }
     },
-    {//404页面
+    // {//404页面
+    //   path: '*',
+    //   name: 'noPage',
+    //   component: noPage,
+    // },
+    {//404页面（默认跳转首页）
       path: '*',
-      name: 'noPage',
-      component: noPage,
+      redirect: '/'
     }
   ]
 })

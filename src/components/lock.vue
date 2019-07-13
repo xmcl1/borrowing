@@ -2,7 +2,7 @@
   <div class="lock">
     <!-- <div class="lockTitle">休息中···</div> -->
     <div class="lockTitle">
-      <img src="@/assets/img/lock.jpg" alt="">
+      <img src="@/assets/img/lock.jpg" alt />
     </div>
     <el-form
       :model="numberValidateForm"
@@ -18,7 +18,12 @@
           { required: true, message: '管理员账号不能为空'}
         ]"
       >
-        <el-input disabled v-model="numberValidateForm.administrator" auto-complete="off"></el-input>
+        <el-input
+          disabled
+          prefix-icon="iconfont el-icon-yonghu"
+          v-model="numberValidateForm.administrator"
+          auto-complete="off"
+        ></el-input>
       </el-form-item>
       <el-form-item
         label="密码"
@@ -27,10 +32,20 @@
           { required: true, message: '密码不能为空'}
         ]"
       >
-        <el-input type="password" v-model="numberValidateForm.password" auto-complete="off"></el-input>
+        <el-input
+          prefix-icon="iconfont el-icon-mima"
+          type="password"
+          v-model="numberValidateForm.password"
+          auto-complete="off"
+        ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" class="submit" native-type="submit" @click="submitForm('numberValidateForm')">登录</el-button>
+        <el-button
+          type="primary"
+          class="submit"
+          native-type="submit"
+          @click="submitForm('numberValidateForm')"
+        >登录</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -161,13 +176,13 @@ export default {
   letter-spacing: 10px;
   color: #707a8a;
 }
-.lockTitle>img{
+.lockTitle > img {
   width: 150px;
 }
 .demo-ruleForm {
   margin: auto;
 }
-.submit{
+.submit {
   margin-left: 200px;
 }
 </style>

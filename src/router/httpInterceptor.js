@@ -6,12 +6,16 @@ export default (function (router) {
         var username = localStorage.getItem("username")
         var isLogin = localStorage.getItem("isLogin")
         if (to.meta.httpAuthorize) {
-            if (username && isLogin) {
+            if (username && isLogin == "true") {
                 next()
             } else {
-                next({
-                    name: "login"
-                })
+                if (username && !isLogin && to.name == "lock") {
+                    next()
+                } else {
+                    next({
+                        name: "login"
+                    })
+                }
             }
         } else {
             next()

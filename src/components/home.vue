@@ -39,19 +39,38 @@ export default {
     return {
       userName: "",
       userpass: "",
-      lockScreen: null //定时器（休息）
+      lockScreen: null //系统锁屏（休息）
     };
   },
   mounted() {
-    this.lock(); //登录超时（模拟）
+    this.isLock(); //系统锁屏（模拟）
     this.getUser(); //获取登录用户名
   },
   methods: {
+    isLock() {
+      //系统锁屏（模拟）
+      var _this = this;
+      var isLock = localStorage.getItem("isLock");
+      if (isLock == "true") {
+        //页面首次加载判断是否需要执行锁屏倒计时
+        this.lock();
+      }
+      this.bus.$on("isLock", val => {
+        console.log(val);
+        if (val && !_this.lockScreen) {
+          this.lock();
+        } else if (!val && _this.lockScreen) {
+          window.clearInterval(_this.lockScreen);
+          _this.lockScreen = null;
+        }
+      });
+    },
     lock() {
       var _this = this;
-      var lockTime = 60; //秒
+      var lockTimeStorage = Number(localStorage.getItem("lockTime"));
+      var lockTime = lockTimeStorage || 5; //秒
       document.body.onmousemove = function() {
-        lockTime = 60; //秒
+        lockTime = lockTimeStorage || 5; //秒
       };
       this.lockScreen = setInterval(() => {
         console.log(lockTime);
@@ -60,10 +79,7 @@ export default {
           window.clearInterval(this.lockScreen);
           localStorage.removeItem("isLogin");
           _this.$router.push({
-            name: "lock",
-            params: {
-              username: _this.userName
-            }
+            name: "lock"
           });
         }
       }, 1000);
@@ -86,6 +102,9 @@ export default {
       localStorage.removeItem("username");
       this.$router.push("/login");
     }
+  },
+  beforeDestroy() {
+    this.bus.$off();
   }
 };
 </script>
